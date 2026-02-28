@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IT Ecosystem | React Project Map</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Outfit:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #3b82f6;
+            --primary-dark: #000957;
+            --accent: #10b981;
+            --bg: #f8fafc;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --card-bg: #ffffff;
+            --border: #e2e8f0;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg: #020617;
+                --text-main: #f1f5f9;
+                --text-muted: #94a3b8;
+                --card-bg: #0f172a;
+                --border: #1e293b;
+            }
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Outfit', sans-serif;
+            letter-spacing: -0.02em;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 5rem;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background: rgba(59, 130, 246, 0.1);
+            color: var(--primary);
+            border-radius: 99px;
+            font-size: 0.75rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 1.5rem;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-p {
+            font-size: 1.25rem;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .section {
+            margin-bottom: 6rem;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .section-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--primary);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 800;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            padding: 2.5rem;
+            border-radius: 2rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.05);
+        }
+
+        .card-num {
+            font-size: 0.75rem;
+            font-weight: 900;
+            color: var(--primary);
+            opacity: 0.5;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1.25rem;
+        }
+
+        .card p {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+        }
+
+        .list {
+            list-style: none;
+        }
+
+        .list-item {
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+            margin-bottom: 1rem;
+            padding: 1rem;
+            background: rgba(0,0,0,0.02);
+            border-radius: 1rem;
+            border: 1px solid transparent;
+        }
+
+        .dark .list-item {
+            background: rgba(255,255,255,0.02);
+        }
+
+        .list-item code {
+            font-family: monospace;
+            color: var(--primary);
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+
+        .list-item span {
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--text-muted);
+        }
+
+        .anatomy-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5rem; }
+            .anatomy-grid { grid-template-columns: 1fr; }
+        }
+
+        footer {
+            text-align: center;
+            padding: 4rem 0;
+            border-top: 1px solid var(--border);
+            color: var(--text-muted);
+            font-size: 0.875rem;
+        }
+
+        .glow {
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            background: var(--primary);
+            filter: blur(100px);
+            opacity: 0.1;
+            z-index: -1;
+        }
+    </style>
+</head>
+<body>
+    <div class="glow" style="top: 10%; right: 10%;"></div>
+    <div class="glow" style="bottom: 20%; left: 5%;"></div>
+
+    <div class="container">
+        <header>
+            <span class="badge">Development Guide</span>
+            <h1>IT Ecosystem <br> Project Blueprint</h1>
+            <p class="hero-p">A specialized guide to understanding the structure, logic, and component-driven architecture of our ReactJS platform.</p>
+        </header>
+
+        <!-- Section 1: Folder Structure -->
+        <section class="section">
+            <div class="section-header">
+                <div class="section-icon">F</div>
+                <h2 class="section-title">Project Map</h2>
+            </div>
+            <div class="grid">
+                <div class="card">
+                    <span class="card-num">01 / REPOSITORY</span>
+                    <h3>Core Structure</h3>
+                    <p>Our files are organized by responsibility to ensure scalability and ease of maintenance.</p>
+                    <div class="list">
+                        <div class="list-item">
+                            <code>src/pages</code>
+                            <span>Top-level views mapped to routes.</span>
+                        </div>
+                        <div class="list-item">
+                            <code>src/components</code>
+                            <span>Reusable UI modules and widgets.</span>
+                        </div>
+                        <div class="list-item">
+                            <code>src/context</code>
+                            <span>Global state (Auth, Theme).</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <span class="card-num">02 / ENTRY</span>
+                    <h3>The Pipeline</h3>
+                    <p>How the application renders from a single point into the browser DOM.</p>
+                    <div class="list">
+                        <div class="list-item">
+                            <code>main.jsx</code>
+                            <span>The initial injection point.</span>
+                        </div>
+                        <div class="list-item">
+                            <code>App.jsx</code>
+                            <span>Routing and layout orchestrator.</span>
+                        </div>
+                        <div class="list-item">
+                            <code>index.css</code>
+                            <span>Global design tokens & Tailwind.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: Component Anatomy -->
+        <section class="section">
+            <div class="section-header">
+                <div class="section-icon">A</div>
+                <h2 class="section-title">Component Anatomy</h2>
+            </div>
+            <div class="card" style="max-width: 100%;">
+                <span class="card-num">03 / FABRICATION</span>
+                <h3>The 4-Part Protocol</h3>
+                <p>Every React file in this ecosystem follows a strict pattern for predictability.</p>
+                <div class="anatomy-grid">
+                    <div class="list-item">
+                        <code>1. Tools (Imports)</code>
+                        <span>Bringing in dependencies like React or Lucide icons.</span>
+                    </div>
+                    <div class="list-item">
+                        <code>2. Brain (Logic)</code>
+                        <span>Using Hooks like useState to handle data and events.</span>
+                    </div>
+                    <div class="list-item">
+                        <code>3. Body (JSX)</code>
+                        <span>The visual structure returning HTML-like syntax.</span>
+                    </div>
+                    <div class="list-item">
+                        <code>4. Share (Export)</code>
+                        <span>Making the component ready for other files.</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: Logic Guide -->
+        <section class="section">
+            <div class="section-header">
+                <div class="section-icon">L</div>
+                <h2 class="section-title">Functional Logic</h2>
+            </div>
+            <div class="grid">
+                <div class="card">
+                    <h3>The Login Gate</h3>
+                    <p>Checks identity nodes via JWT before allowing access to secure protocols.</p>
+                    <div class="list-item">
+                        <code>axios.post</code>
+                        <span>Sends digital packets to backend.</span>
+                    </div>
+                </div>
+                <div class="card">
+                    <h3>Dashboard Loop</h3>
+                    <p>Automatically fetches system telemetry on mount using useEffect.</p>
+                    <div class="list-item">
+                        <code>useEffect</code>
+                        <span>Triggers data sync on page load.</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <p>&copy; 2026 Soniapps IT Ecosystem. Documentation Node Generated by Antigravity.</p>
+        </footer>
+    </div>
+</body>
+</html>

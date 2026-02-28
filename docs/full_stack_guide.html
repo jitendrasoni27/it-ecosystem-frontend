@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Full-Stack Technical Blueprint | IT Ecosystem</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #3b82f6;
+            --primary-dark: #000957;
+            --accent: #10b981;
+            --bg: #0f172a;
+            --card: #1e293b;
+            --text-main: #f1f5f9;
+            --text-muted: #94a3b8;
+            --border: #334155;
+            --code-bg: #020617;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 8rem 2rem 4rem;
+            text-align: center;
+            background: radial-gradient(circle at 50% 50%, rgba(59, 130, 246, 0.15) 0%, transparent 50%);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 0.5rem 1.25rem;
+            background: rgba(59, 130, 246, 0.1);
+            color: var(--primary);
+            border-radius: 99px;
+            font-size: 0.75rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 2rem;
+            border: 1px solid rgba(59, 130, 246, 0.2);
+        }
+
+        h1 {
+            font-size: clamp(2.5rem, 8vw, 4.5rem);
+            font-weight: 800;
+            letter-spacing: -0.04em;
+            line-height: 1;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #fff 0%, #94a3b8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-desc {
+            font-size: 1.25rem;
+            color: var(--text-muted);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* Navigation */
+        .nav-sticky {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+            padding: 1rem 0;
+        }
+
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.875rem;
+            font-weight: 600;
+            transition: color 0.2s;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        /* Sections */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 6rem 2rem;
+        }
+
+        .section-header {
+            margin-bottom: 4rem;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .section-title::before {
+            content: '';
+            width: 40px;
+            height: 4px;
+            background: var(--primary);
+            border-radius: 99px;
+        }
+
+        /* Grid System */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            padding: 2.5rem;
+            border-radius: 1.5rem;
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(59, 130, 246, 0.5);
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        /* Tables */
+        .table-wrap {
+            overflow-x: auto;
+            background: var(--card);
+            border-radius: 1.5rem;
+            border: 1px solid var(--border);
+            margin-top: 2rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.875rem;
+        }
+
+        th {
+            background: rgba(51, 65, 85, 0.5);
+            text-align: left;
+            padding: 1.25rem 1.5rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-muted);
+            border-bottom: 1px solid var(--border);
+        }
+
+        td {
+            padding: 1.25rem 1.5rem;
+            border-bottom: 1px solid var(--border);
+            color: var(--text-main);
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        .method {
+            font-weight: 800;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            margin-right: 0.5rem;
+            display: inline-block;
+            min-width: 60px;
+            text-align: center;
+        }
+
+        .get { background: rgba(16, 185, 129, 0.1); color: var(--accent); }
+        .post { background: rgba(59, 130, 246, 0.1); color: var(--primary); }
+        .put { background: rgba(245, 158, 11, 0.1); color: #f59e0b; }
+        .delete { background: rgba(239, 68, 68, 0.1); color: #ef4444; }
+
+        /* Code Block */
+        code, pre {
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .code-snippet {
+            background: var(--code-bg);
+            padding: 1.5rem;
+            border-radius: 1rem;
+            font-size: 0.8125rem;
+            margin-top: 1rem;
+            color: #94a3b8;
+            border: 1px solid var(--border);
+            position: relative;
+        }
+
+        .code-snippet::before {
+            content: 'EXAMPLE';
+            position: absolute;
+            top: 0;
+            right: 1.5rem;
+            background: var(--primary);
+            color: white;
+            font-size: 0.625rem;
+            font-weight: 900;
+            padding: 0.25rem 0.5rem;
+            border-radius: 0 0 4px 4px;
+        }
+
+        /* Architecture Diagram Simulation */
+        .diag-wrap {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 2rem;
+            margin: 4rem 0;
+            flex-wrap: wrap;
+        }
+
+        .node {
+            padding: 2rem;
+            border-radius: 1rem;
+            border: 2px solid var(--border);
+            background: var(--card);
+            text-align: center;
+            min-width: 200px;
+        }
+
+        .node h4 { color: var(--primary); margin-bottom: 0.5rem; }
+
+        .arrow {
+            position: relative;
+            width: 100px;
+            height: 2px;
+            background: var(--border);
+        }
+
+        .arrow::after {
+            content: '▶';
+            position: absolute;
+            right: -5px;
+            top: -10px;
+            color: var(--border);
+        }
+
+        /* Footer */
+        footer {
+            padding: 4rem 2rem;
+            text-align: center;
+            border-top: 1px solid var(--border);
+            background: rgba(2, 6, 23, 0.5);
+            color: var(--text-muted);
+            font-size: 0.875rem;
+        }
+
+        .tech-list {
+            margin-top: 1rem;
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .tech-tag {
+            padding: 0.25rem 0.75rem;
+            background: var(--card);
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        @media (max-width: 768px) {
+            .nav-links { gap: 1rem; }
+            .diag-wrap { flex-direction: column; }
+            .arrow { width: 2px; height: 50px; }
+            .arrow::after { right: -6px; top: auto; bottom: -5px; transform: rotate(90deg); }
+        }
+    </style>
+</head>
+<body>
+
+    <section class="hero">
+        <span class="badge">Architecture V2.0</span>
+        <h1>Full-Stack Technical <br> Ecosystem</h1>
+        <p class="hero-desc">The complete engineering blueprint of the IT Ecosystem platform, bridging modern React presentations with enterprise Spring Boot logic.</p>
+    </section>
+
+    <nav class="nav-sticky">
+        <ul class="nav-links">
+            <li><a href="#frontend">Frontend</a></li>
+            <li><a href="#backend">Backend</a></li>
+            <li><a href="#security">Security</a></li>
+            <li><a href="#database">Database</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <!-- FRONTEND SECTION -->
+        <section id="frontend" class="section">
+            <div class="section-header">
+                <h2 class="section-title">Frontend Architecture</h2>
+                <p>Built with **React 19**, **Vite**, and **Tailwind CSS**, the frontend follows a modular component-driven pattern.</p>
+            </div>
+
+            <div class="grid">
+                <div class="card">
+                    <h3>Reactive Infrastructure</h3>
+                    <p>Standardized directory structure for clarity and scalability.</p>
+                    <ul style="list-style: none; color: var(--text-muted); font-size: 0.875rem;">
+                        <li>📁 <b>src/pages</b> — Top-level views (Home, Dashboard, Admin)</li>
+                        <li>📁 <b>src/components</b> — Reusable UI modules (Navbar, Modals)</li>
+                        <li>📁 <b>src/context</b> — Global State Management (Auth, Theme, Cart)</li>
+                        <li>📁 <b>src/hooks</b> — Custom Logic (useAnalytics, useAuth)</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>Component Protocol</h3>
+                    <p>Every component is a functional module with encapsulated logic.</p>
+                    <div class="code-snippet">
+<pre>
+const MyComponent = ({ props }) => {
+  const [state, setState] = useState(); // Brain
+  useEffect(() => { ... }); // Lifecycle
+  return ( &lt;div&gt;...&lt;/div&gt; ); // Body
+};
+</pre>
+                    </div>
+                </div>
+            </div>
+
+            <h4 style="margin-top: 3rem; margin-bottom: 1rem; color: var(--primary);">SPA Routing Map</h4>
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Path</th>
+                            <th>Page Component</th>
+                            <th>Guard / Access</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><code>/</code></td><td>Home.jsx</td><td>Public</td></tr>
+                        <tr><td><code>/login</code></td><td>Login.jsx</td><td>Public</td></tr>
+                        <tr><td><code>/admin-dashboard</code></td><td>AdminDashboard.jsx</td><td>ROLE_ADMIN</td></tr>
+                        <tr><td><code>/profile</code></td><td>Profile.jsx</td><td>Authenticated</td></tr>
+                        <tr><td><code>/cart</code></td><td>Cart.jsx</td><td>Customer</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- BACKEND SECTION -->
+        <section id="backend" class="section">
+            <div class="section-header">
+                <h2 class="section-title">Backend Infrastructure</h2>
+                <p>Enterprise core powered by **Spring Boot**, implementing REST protocols and JPA persistence.</p>
+            </div>
+
+            <div class="grid">
+                <div class="card">
+                    <h3>Layered Package System</h3>
+                    <p>Separation of concerns using the Controller-Service-Repository pattern.</p>
+                    <ul style="list-style: none; color: var(--text-muted); font-size: 0.875rem;">
+                        <li>🏷️ <b>Controller</b> — Handle HTTP requests & REST endpoints.</li>
+                        <li>⚙️ <b>Service</b> — Business logic & orchestration.</li>
+                        <li>💾 <b>Repository</b> — JPA/Hibernate database interfaces.</li>
+                        <li>📦 <b>Model</b> — Entity definitions & Database Schema mapping.</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>REST Service Specs</h3>
+                    <p>Standardized JSON communication between Frontend and Backend.</p>
+                    <div class="code-snippet">
+<pre>
+@RestController
+@RequestMapping("/api/auth")
+public class AuthController {
+  @PostMapping("/signin")
+  public ResponseEntity<?> login(...) { ... }
+}
+</pre>
+                    </div>
+                </div>
+            </div>
+
+            <h4 style="margin-top: 3rem; margin-bottom: 1rem; color: var(--primary);">API Registry</h4>
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Endpoint</th>
+                            <th>Method</th>
+                            <th>Purpose</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><code>/api/auth/signin</code></td><td><span class="method post">POST</span></td><td>Authentication & JWT Retrieval</td></tr>
+                        <tr><td><code>/api/auth/signup</code></td><td><span class="method post">POST</span></td><td>User Registration</td></tr>
+                        <tr><td><code>/api/products</code></td><td><span class="method get">GET</span></td><td>Cache-optimized product retrieval</td></tr>
+                        <tr><td><code>/api/admin/users</code></td><td><span class="method get">GET</span></td><td>Administrative user node query</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- SECURITY SECTION -->
+        <section id="security" class="section">
+            <div class="section-header">
+                <h2 class="section-title">Security Gateway</h2>
+                <p>Hardened authentication loop using **Spring Security** and **JWT (JSON Web Tokens)**.</p>
+            </div>
+
+            <div class="diag-wrap">
+                <div class="node">
+                    <h4>Client</h4>
+                    <span style="font-size: 0.75rem; color: var(--text-muted);">Request + JWT</span>
+                </div>
+                <div class="arrow"></div>
+                <div class="node" style="border-color: var(--primary);">
+                    <h4>Filter Chain</h4>
+                    <span style="font-size: 0.75rem; color: var(--text-muted);">JwtAuthTokenFilter</span>
+                </div>
+                <div class="arrow"></div>
+                <div class="node">
+                    <h4>Security Context</h4>
+                    <span style="font-size: 0.75rem; color: var(--text-muted);">Authorized Node</span>
+                </div>
+            </div>
+
+            <div class="card" style="max-width: 100%;">
+                <h3>Auth Protocol</h3>
+                <p>Passwords are encrypted using <b>BCrypt</b> hashing. Every request (except public ones) must include a valid JWT in the <code>Authorization: Bearer</code> header. Tokens expire automatically after 24 hours.</p>
+            </div>
+        </section>
+
+        <!-- DATABASE SECTION -->
+        <section id="database" class="section">
+            <div class="section-header">
+                <h2 class="section-title">Database Schema</h2>
+                <p>Relational Persistence Layer on **MySQL**, managed via Hibernate Entities.</p>
+            </div>
+
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Field (User Entity)</th>
+                            <th>Type</th>
+                            <th>Constraints</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><code>id</code></td><td>BIGINT</td><td>PK, AUTO</td><td>Unique Identity Node</td></tr>
+                        <tr><td><code>username</code></td><td>VARCHAR(255)</td><td>UNIQUE</td><td>Identity login key</td></tr>
+                        <tr><td><code>email</code></td><td>VARCHAR(255)</td><td>UNIQUE</td><td>Verified communication node</td></tr>
+                        <tr><td><code>password</code></td><td>VARCHAR(255)</td><td>NOT NULL</td><td>Hashed credentials (BCrypt)</td></tr>
+                        <tr><td><code>role</code></td><td>ENUM</td><td>NOT NULL</td><td>ADMIN, PARTNER, CUSTOMER</td></tr>
+                        <tr><td><code>walletBalance</code></td><td>DOUBLE</td><td>DEFAULT 0</td><td>Financial credit ledger</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 IT Ecosystem Project Blueprint. Master Documentation Node.</p>
+        <div class="tech-list">
+            <span class="tech-tag">React 19</span>
+            <span class="tech-tag">Spring Boot 3</span>
+            <span class="tech-tag">MySQL 8</span>
+            <span class="tech-tag">JWT</span>
+            <span class="tech-tag">Vite</span>
+            <span class="tech-tag">Tailwind</span>
+        </div>
+    </footer>
+
+</body>
+</html>
